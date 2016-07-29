@@ -1,2 +1,1 @@
 # rice-ticket
-# rice-ticket
