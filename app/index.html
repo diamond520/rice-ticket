@@ -1,0 +1,108 @@
+<!doctype html>
+<html ng-app="riceticketApp" ng-controller="InitCtrl" ng-cloak>
+  <head>
+    <meta charset="utf-8">
+    <title page-info="title" >長期飯票招募所</title>
+    <script>
+      document.write('<base href="' + document.location + '" />');
+    </script>
+    <link rel="shortcut icon" href="favicon.ico?v=5" />
+    <meta page-info="title" page-info-replace="content" name="description" content="長期飯票">
+    <meta name="viewport" content="width=device-width,height=device-height">
+
+    <!-- open graph meta -->
+    <meta page-info="url" page-info-replace="content" property="og:url" content="">
+    <meta page-info="title" page-info-replace="content" property="og:title" content="">
+    <meta page-info="description" page-info-replace="content" property="og:description" content="">
+    <meta page-info="image" page-info-replace="content" property="og:image" content="">
+    <meta name="fragment" content="!">
+
+  </head>
+  <body>
+    <!--[if lte IE 8]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+    <!-- Add your site or application content here -->
+    <div id="header">
+      <div class="navbar navbar-default" role="navigation">
+        <div class="container">
+          <div class="navbar-header">
+            <a ga-event ga-event-category="大首頁" ga-event-label="Menubar_回首頁" class="navbar-brand" href="#!/">
+              <img alt="Sanlih logo" src="images/logo.png" />
+            </a>
+          </div>
+          <div class="share">
+            <div class="icons">
+              <a title="{{social.title}}" ga-event ga-event-category="大首頁" ga-event-label="Menubar_{{social.title}}" class="repeated-item" ng-click="socialLink($event, social)" ng-repeat="social in socialLinks" ng-switch="social.type" href="{{ social.link }}" target="{{ social.target }}">
+                <span ng-switch-default>{{social.title}}</span>
+                <img ng-switch-when="image" ng-src="{{ social.data.src }}" height="{{ social.data.height }}" width="{{ social.data.width }}" />
+              </a>
+            </div>
+          </div>
+          <div class="search">
+            <div class="hot-keywords">
+              <img src="images/hot_icon.png" width="35" height="35" class="keywords_linK"/>
+              <a class="repeated-item" google-search="{{keyword}}" ng-repeat="keyword in keywords" href="#"> {{ keyword }}</a>
+            </div>
+            <div class="search-field-container">
+              <div class="search-icon"><img src="images/search_icon.png" width="13" height="14" /></div>
+              <!-- <gcse:search></gcse:search> -->
+              <input name="search" id="searchInput" custom-search custom-search-submit=".search-icon" type="text" class="input" />
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="container">
+      <div class="menuContainer" scrolling-fixed="top">
+        <div ng-if="!$root.customMenuBars" class="menubar">
+          <div class="lists">
+            <span class="list" ng-class="{active: $root.location===menuBar.url}" emit-last-repeater-element ng-repeat="menuBar in menuBars" submenu="menuBar.submenu">
+              <a ga-event ga-event-category="大首頁" ga-event-label="Menubar_{{menuBar.name}}" class="menu" href="{{ menuBar.url }}" target="{{ menuBar.target }}">{{ menuBar.name }}</a>
+            </span>
+          </div>
+          <!-- <a class="menu-more scorllTextAnimation">更多<span class="glyphicon glyphicon-triangle-bottom"></span></a> -->
+        </div>
+        <div ng-if="$root.customMenuBars" class="menubar">
+          <div class="lists">
+            <!-- <a class="list" ng-class="{active: $root.location===menuBar.url}" emit-last-repeater-element ng-repeat="menuBar in $root.customMenuBars" href="{{ menuBar.url }}" target="{{ menuBar.target }}">{{ menuBar.name }}</a> -->
+            <span class="list" ng-class="{active: $root.location===menuBar.url}" emit-last-repeater-element ng-repeat="menuBar in $root.customMenuBars" submenu="menuBar.submenu">
+              <a ga-event ga-event-category="大首頁" ga-event-label="Menubar_{{menuBar.name}}" class="menu" href="{{ menuBar.url }}" target="{{ menuBar.target }}">{{ menuBar.name }}</a>
+            </span>
+          </div>
+          <!-- <a class="menu-more scorllTextAnimation">更多<span class="glyphicon glyphicon-triangle-bottom"></span></a> -->
+        </div>
+      </div>
+      <div class="main loading" ng-view=""></div>
+    </div>
+
+    <div id="footer">
+      <div class="container">
+        <div class="channel-programs">
+          <ul class="repeated-item" ng-repeat="channelProgram in channelPrograms">
+            <div class="channel-title"> <img ng-src="{{ channelProgram.titleImage }}" /></div>
+            <li class="program-title" ng-repeat="program in channelProgram.programs"><a href="{{ program.link }}" target="_blank">{{ program.title }}</a></li>
+          </ul>
+        </div>
+        <div class="other-logos">
+          <a class="repeated-item" ng-repeat="logo in otherLogos" href="{{ logo.link }}" target="_blank">
+            <img alt="{{logo.title}}" ng-src="{{ logo.src }}" />
+          </a>
+        </div>
+        <div class="platformSwitch">
+          <div class="change"><span class="change_fonta">電腦版</span><span class="change_font2"><a ng-click="gotoMobile()" href="#">手機版</a></span></div>
+        </div>
+        <div class="footer-text">
+          <div class="links">
+            <span class="repeated-item" ng-repeat="link in footerLinks">
+              <a  href="{{link.link}}" target="{{ link.target }}">{{ link.title }}</a>
+            </span>
+          </div>
+          <div class="copyright">© 2016 Sanlih E-Television All Rights Reserved 版權所有 盜用必究 台北市內湖區舊宗路一段159號 02-8792-8888</div>
+        </div>
+        <a class="gotoTop" scroll-to="top" href="#"><img src="images/top_btn.png" width="123" height="30" border="0"></a>
+      </div><!-- end of container -->
+    </div>
+</body>
+</html>
